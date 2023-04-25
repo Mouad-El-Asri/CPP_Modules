@@ -5,15 +5,18 @@
 
 class Contact {
     private:
-        std::string m_first_name;
-        std::string m_last_name;
-        std::string m_nickname;
-        std::string m_phone_number;
-        std::string m_darkest_secret;
-        int         index;
+        std::string m_FirstName;
+        std::string m_LastName;
+        std::string m_Nickname;
+        std::string m_PhoneNumber;
+        std::string m_DarkestSecret;
+        int         m_Index;
 
     public:
         Contact();
+        Contact(std::string FirstName, std::string LastName, \
+                std::string Nickname, std::string PhoneNumber, \
+                std::string DarkestSecret, int Index);
         ~Contact();
 };
 
