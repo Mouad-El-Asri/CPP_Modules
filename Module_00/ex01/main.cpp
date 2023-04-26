@@ -1,21 +1,24 @@
-#include <string>
 #include "PhoneBook.hpp"
 
-int	main(void)
+int	main()
 {
-	PhoneBook MyPhoneBook;
-	std::string input = "";
+	int	contactIndex = 0;
+	PhoneBook	MyPhoneBook;
+	std::string	input = "";
 
-	if (input != "EXIT")
+	while (input != "EXIT")
 	{
 		if (input == "ADD")
 		{
-
+			MyPhoneBook.addContact(contactIndex);
+			contactIndex++;
 		}
 		else if (input == "SEARCH")
 		{
-
+			MyPhoneBook.printContacts();
+			MyPhoneBook.searchForContact();
 		}
+		std::cout << "PhoneBook$ ";
 		std::cin >> input;
 	}
 
