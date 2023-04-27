@@ -1,17 +1,19 @@
 #include "PhoneBook.hpp"
 
+int	contactIndex = -1;
+
 int	main()
 {
-	int	contactIndex = 0;
 	PhoneBook	MyPhoneBook;
-	std::string	input = "";
+	std::string	input;
 
+	input = "";
 	while (input != "EXIT")
 	{
 		if (input == "ADD")
 		{
-			MyPhoneBook.addContact(contactIndex);
 			contactIndex++;
+			MyPhoneBook.addContact(contactIndex);
 		}
 		else if (input == "SEARCH")
 		{
@@ -20,6 +22,9 @@ int	main()
 		}
 		std::cout << "PhoneBook$ ";
 		std::cin >> input;
+		if (std::cin.eof()) {
+			return (0);
+		}
 	}
 
 	return (0);

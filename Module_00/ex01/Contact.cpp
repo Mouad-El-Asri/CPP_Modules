@@ -1,5 +1,4 @@
 #include "Contact.hpp"
-#include <iomanip>
 
 Contact::Contact()
 {
@@ -18,50 +17,83 @@ void	Contact::setIndex(int index)
 
 bool	Contact::isEmpty() const
 {
-    return ((m_firstName.empty()) || (m_lastName.empty()) ||
-            (m_nickname.empty()));
+    return ((m_firstName.empty()) || (m_lastName.empty()) || \
+            (m_nickname.empty()) || m_phoneNumber.empty() || \
+			m_darkestSecret.empty());
 }
 
 void	Contact::printContactInfo(int index) const
 {
     if (isEmpty())
         return ;
-    std::cout << "Contact Index : " << index << '\n';
-    std::cout << "First Name : " << m_firstName << '\n';
-    std::cout << "Last Name : " << m_lastName << '\n';
-    std::cout << "Nickname : " << m_nickname << '\n';
+	std::cout << '\n';
+    std::cout << "# Contact Index : " << index << '\n';
+    std::cout << "# First Name : " << m_firstName << '\n';
+    std::cout << "# Last Name : " << m_lastName << '\n';
+    std::cout << "# Nickname : " << m_nickname << '\n';
+    std::cout << "# Phone Number : " << m_phoneNumber << '\n';
+    std::cout << "# Darkest Secret : " << m_darkestSecret << '\n';
+	std::cout << '\n';
+}
+
+void	Contact::phoneNumber()
+{
+	bool isNumber;
+
+	isNumber = 1;
+	m_phoneNumber = getInput("- Enter your phone number : ");
+	while (isNumber)
+	{
+		for (int i = 0; i < int(m_phoneNumber.length()); i++)
+		{
+			if (!isdigit(m_phoneNumber[i]))
+			{
+				isNumber = 0;
+				std::cout << "Oops, that is not a correct phone number!"
+							" Please try again with a valid phone number.\n";
+				break ;
+			}
+		}
+		if (isNumber)
+			break ;
+		isNumber = 1;
+		m_phoneNumber = getInput("- Enter your phone number : ");
+	}
 }
 
 void	Contact::setup(void)
 {
-    m_firstName = getInput("Enter you first name : ");
-    m_lastName = getInput("Enter your last name : ");
-    m_nickname = getInput("Enter your nickname : ");
-    m_phoneNumber = getInput("Enter your phone number : ");
-    m_darkestSecret = getInput("Enter your darkest secret : ");
+	std::cin.ignore();
+    m_firstName = getInput("- Enter you first name : ");
+    m_lastName = getInput("- Enter your last name : ");
+    m_nickname = getInput("- Enter your nickname : ");
+	phoneNumber();
+    m_darkestSecret = getInput("- Enter your darkest secret : ");
+	std::cout << '\n';
 }
 
 std::string	Contact::getInput(std::string str) const
 {
-    std::string input = "";
-    bool valid = 0;
+    std::string input;
+    bool flag;
 
-    while (!valid)
+	input = "";
+	flag = 0;
+    while (!flag)
     {
-        std::cout << str << '\n';
+        std::cout << str;
         std::getline(std::cin, input);
-        if (std::cin.good() && !input.empty())
-            valid = 1;
+		if (input.find_first_not_of(" \t\n\v\f\r") == std::string::npos)
+			std::cout << "Oops, the input contains only whitespaces! Please try again.\n";
+        else if (!input.empty())
+            flag = 1;
         else
-        {
-            std::cin.clear();
-            std::cout << "Oops, that input is not valid. Please try again with a valid input.\n";
-        }
+            std::cout << "Oops, that input is not valid! Please try again with a valid input.\n";
     }
     return (input);
 }
 
-void	Contact::viewContacts(int index) const
+void	Contact::listContacts(int index) const
 {
     if (isEmpty())
         return ;
@@ -69,14 +101,12 @@ void	Contact::viewContacts(int index) const
     std::cout << "|" << std::setw(10) << strLen(m_firstName);
     std::cout << "|" << std::setw(10) << strLen(m_lastName);
     std::cout << "|" << std::setw(10) << strLen(m_nickname);
-    //std::cout << "|" << std::endl;
+    std::cout << "|\n";
 }
 
 std::string Contact::strLen(std::string str) const
 {
     if (str.length() > 10)
-        return str.substr(0, 9) + ".";
+        return (str.substr(0, 9) + ".");
     return (str);
 }
-
-// check good
