@@ -15,7 +15,7 @@ void	Contact::setIndex(int index)
     m_index = index;
 }
 
-bool	Contact::isEmpty() const
+bool	Contact::isEmpty(void) const
 {
     return ((m_firstName.empty()) || (m_lastName.empty()) || \
             (m_nickname.empty()) || m_phoneNumber.empty() || \
@@ -36,7 +36,7 @@ void	Contact::printContactInfo(int index) const
 	std::cout << '\n';
 }
 
-void	Contact::phoneNumber()
+void	Contact::phoneNumber(void)
 {
 	bool isNumber;
 

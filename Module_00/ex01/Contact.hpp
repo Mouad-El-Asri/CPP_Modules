@@ -15,8 +15,8 @@ class Contact
         std::string m_darkestSecret;
         int         m_index;
 
-		void		phoneNumber();
-		bool        isEmpty() const;
+		void		phoneNumber(void);
+		bool        isEmpty(void) const;
 		std::string getInput(std::string str) const;
 		std::string strLen(std::string str) const;
 

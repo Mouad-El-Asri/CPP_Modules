@@ -2,7 +2,7 @@
 
 int	contactIndex = -1;
 
-int	main()
+int	main(void)
 {
 	PhoneBook	MyPhoneBook;
 	std::string	input;

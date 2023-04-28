@@ -12,10 +12,10 @@ int main(int argc, char **argv)
 			if (i < argc - 1)
 				std::cout << " ";
 		}
-		std::cout << std::endl;
+		std::cout << '\n';
 	}
 	else
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
 
 	return (0);
 }

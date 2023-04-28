@@ -10,12 +10,12 @@ class PhoneBook
         Contact	m_contacts[8];
 
 		int		stringIsNumber(std::string str) const;
-        int     readIndexInput() const;
+        int     readIndexInput(void) const;
 
     public:
 		void    addContact(int contactIndex);
-        void    searchForContact() const;
-        void    printContacts() const;
+        void    searchForContact(void) const;
+        void    printContacts(void) const;
 };
 
 #endif

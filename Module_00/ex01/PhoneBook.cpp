@@ -9,7 +9,7 @@ void    PhoneBook::addContact(int contactIndex)
     m_contacts[contactIndex % 8].setIndex(contactIndex % 8);
 }
 
-void	PhoneBook::searchForContact() const
+void	PhoneBook::searchForContact(void) const
 {
     int i;
 
@@ -17,7 +17,7 @@ void	PhoneBook::searchForContact() const
     m_contacts[i].printContactInfo(i);
 }
 
-void	PhoneBook::printContacts() const
+void	PhoneBook::printContacts(void) const
 {
     int i;
 
@@ -45,7 +45,7 @@ int	PhoneBook::stringIsNumber(std::string str) const
 	return (isNumber);
 }
 
-int	PhoneBook::readIndexInput() const
+int	PhoneBook::readIndexInput(void) const
 {
     std::string	indexInput;
     bool		flag;
