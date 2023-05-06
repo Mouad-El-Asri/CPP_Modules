@@ -1,14 +1,14 @@
+#include "StringReplace.hpp"
 
-#include "SedV2.hpp"
-
-int main ( int ac, char **av )
+int main (int argc, char **argv)
 {
-    if (ac != 4) {
-        std::cerr << "Usage: ./SedV2 <filename> <to_find> <replace>." << std::endl;
-        return EXIT_FAILURE;
-    } else {
-        SedV2   sed2(av[1]);
-        sed2.replace(av[2], av[3]);
+    if (argc != 4)
+	{
+        std::cerr << "Error : number of arguments is not valid !\n";
+        return (1);
     }
-    return EXIT_SUCCESS;
+	StringReplace	replacer(argv[1]);
+	replacer.strReplace(argv[2], argv[3]);
+
+    return (0);
 }

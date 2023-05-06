@@ -1,16 +1,17 @@
 #include "HumanA.hpp"
 
-HumanA::HumanA( std::string name, Weapon& weapon ) : _name(name), _weapon(weapon) {
+HumanA::HumanA(std::string name, Weapon &weapon) : weapon(weapon)
+{
+	this->name = name;
+	std::cout << "HumanA object called " << this->name << " created successfully !!!\n";
 }
 
 HumanA::~HumanA()
 {
+	std::cout << "HumanA object called " << this->name << " destroyed successfully !!!\n";
 }
 
-void    HumanA::attack( void ) const {
-    if (this->_weapon.getType() != "") {
-        std::cout << _name << " attacks with their " << this->_weapon.getType() << std::endl;
-    } else {
-        std::cout << _name << " doesn't have a weapon to attack." << std::endl;
-    }
+void    HumanA::attack(void) const
+{
+    std::cout << name << " attacks with their " << weapon.getType() << '\n';
 }

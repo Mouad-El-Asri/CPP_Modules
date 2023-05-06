@@ -1,23 +1,24 @@
-NAME = THIS_IS_BRAIN
+NAME = Harl
 
 CC = c++
 
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = main.cpp
+SRCS = Harl.cpp \
+	main.cpp
 
-OBJ = $(SRC:.cpp=.o)
+OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-$(OBJ): $(SRC)
-	$(CC) $(CFLAGS) -c $(SRC)
+$(OBJS): $(SRCS)
+	$(CC) $(CFLAGS) -c $(SRCS)
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
