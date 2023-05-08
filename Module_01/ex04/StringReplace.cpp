@@ -16,12 +16,14 @@ void	StringReplace::replaceStringInFile(std::string str1, std::string str2, \
 		std::string inFileContent)
 {
 	std::ofstream	outFile(outputFile);
-	size_t			position = inFileContent.find(str1);
+	int				startPosition = 0;
+	size_t			position = inFileContent.find(str1, startPosition);
 	while (position != std::string::npos)
 	{
 		inFileContent.erase(position, str1.length());
 		inFileContent.insert(position, str2);
-		position = inFileContent.find(str1);
+		startPosition = position + str2.length();
+		position = inFileContent.find(str1, startPosition);
 	}
 	outFile << inFileContent;
 	outFile.close();
