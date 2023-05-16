@@ -8,9 +8,9 @@ class	Fixed
 	private:
 		int					fixedPointNum;
 		static const int	numFractionalBits = 8;
+
 	public:
 		Fixed();
-		Fixed(int fixedPointNum);
 		Fixed(const Fixed &other);
 		Fixed& operator=(const Fixed& other);
 		~Fixed();
