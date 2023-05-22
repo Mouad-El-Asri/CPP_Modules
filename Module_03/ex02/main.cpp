@@ -7,5 +7,6 @@ int	main(void)
 	robot1.attack("roboWarrior");
 	robot1.takeDamage(10);
 	robot1.beRepaired(10);
+	robot1.highFivesGuys();
 	return (0);
 }
