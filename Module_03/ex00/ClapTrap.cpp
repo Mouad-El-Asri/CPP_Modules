@@ -15,7 +15,7 @@ ClapTrap::ClapTrap(std::string name)
 	this->hitPoints = 10;
 	this->energyPoints = 10;
 	this->attackDamage = 0;
-	std::cout << "Constructor called\n";
+	std::cout << "Parameterized constructor called\n";
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other)
