@@ -1,4 +1,4 @@
-NAME = ex00
+NAME = ex01
 
 CC = c++
 
@@ -7,8 +7,7 @@ CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 SRCS = Animal.cpp \
 	Dog.cpp \
 	Cat.cpp \
-	WrongAnimal.cpp \
-	WrongCat.cpp \
+	Brain.cpp \
 	main.cpp
 
 OBJS = $(SRCS:.cpp=.o)

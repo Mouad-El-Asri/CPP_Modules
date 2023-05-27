@@ -3,24 +3,29 @@
 Dog::Dog() : Animal("DOG")
 {
 	std::cout << "Dog default constructor called\n";
+	brain = new Brain();
 }
 
 Dog::Dog(const Dog &other)
 {
-	(*this) = other;
-	std::cout << "Dog copy constructor called\n";
+	this->brain = new Brain(*other.brain);
+	std::cout << "Dog deep copy constructor called\n";
 }
 
 Dog&	Dog::operator=(const Dog &other)
 {
 	if (this != &other)
-		this->type = other.type;
-	std::cout << "Dog copy assignment operator called\n";
+	{
+		delete this->brain;
+		brain = new Brain(*other.brain);
+	}
+	std::cout << "Dog deep copy assignment operator called\n";
 	return (*this);
 }
 
 Dog::~Dog()
 {
+	delete brain;
 	std::cout << "Dog destructor called\n";
 }
 
