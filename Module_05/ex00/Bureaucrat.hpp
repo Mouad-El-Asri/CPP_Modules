@@ -23,4 +23,6 @@ class	Bureaucrat
 		void				decrementGrade();
 };
 
+std::ostream&	operator<<(std::ostream& os, const Bureaucrat& bureaucrat);
+
 #endif
