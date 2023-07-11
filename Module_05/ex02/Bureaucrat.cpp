@@ -82,6 +82,19 @@ void	Bureaucrat::decrementGrade()
 	}
 }
 
+void  Bureaucrat::executeForm(AForm const & form)
+{
+    try
+    {
+        form.execute(Bureaucrat("Bureaucrat", 1));
+        std::cout << this->name << " executed " << form.getName() << "\n";
+    }
+    catch(std::exception & e)
+    {
+        std::cout << "Exception Caught : " << e.what() << "\n";
+    }
+}
+
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
 	return ("Grade is too high");
