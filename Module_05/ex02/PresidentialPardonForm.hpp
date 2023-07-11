@@ -1,7 +1,6 @@
 #ifndef PRESIDENTIALPARDONFORM_HPP
 # define PRESIDENTIALPARDONFORM_HPP
 
-# include "Bureaucrat.hpp"
 # include "AForm.hpp"
 
 # define PRESIDENTIALPARDONFORM_NAME "Presidential Pardon Form"
