@@ -2,17 +2,22 @@
 
 int main()
 {
-	Bureaucrat bureaucrat("MOUAD", 15);
-	bureaucrat.incrementGrade();
-	bureaucrat.decrementGrade();
-	std::cout << bureaucrat << "\n";
+    try {
+        Bureaucrat  bureaucrat("Bureaucrat", 1);
 
-	std::cout << "\n";
+        std::cout << bureaucrat;
 
-	Bureaucrat bureaucrat1("AMINE", 1);
-	bureaucrat1.incrementGrade();
-	bureaucrat1.decrementGrade();
-	std::cout << bureaucrat1 << "\n";
+        bureaucrat.decrementGrade();
+        std::cout << bureaucrat;
 
-	return (0);
+        bureaucrat.incrementGrade();
+        std::cout << bureaucrat;
+
+        bureaucrat.decrementGrade();
+        std::cout << bureaucrat;
+    }
+    catch (std::exception& e) {
+        std::cout << e.what() << std::endl;
+    }
+    return (0);
 }

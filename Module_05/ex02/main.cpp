@@ -1,20 +1,34 @@
 #include "Bureaucrat.hpp"
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main()
 {
     try
     {
-        Bureaucrat bureaucrat("MOUAD", 15);
-        bureaucrat.incrementGrade();
-        bureaucrat.decrementGrade();
-        std::cout << bureaucrat << "\n";
+		Bureaucrat bureaucrat("Bureaucrat", 1);
 
-        std::cout << "\n";
+		std::cout << '\n';
 
-        Bureaucrat bureaucrat1("AMINE", 1);
-        bureaucrat1.incrementGrade();
-        bureaucrat1.decrementGrade();
-        std::cout << bureaucrat1 << "\n";
+		ShrubberyCreationForm shrubberyCreationForm("ShrubberyCreationForm");
+		RobotomyRequestForm robotomyRequestForm("RobotomyRequestForm");
+		PresidentialPardonForm presidentialPardonForm("PresidentialPardonForm");
+
+		std::cout << '\n';
+
+		bureaucrat.signForm(shrubberyCreationForm);
+		bureaucrat.signForm(robotomyRequestForm);
+		bureaucrat.signForm(presidentialPardonForm);
+
+		std::cout << '\n';
+
+		bureaucrat.executeForm(shrubberyCreationForm);
+		bureaucrat.executeForm(robotomyRequestForm);
+		bureaucrat.executeForm(presidentialPardonForm);
+
+		std::cout << '\n';
     }
     catch(std::exception & e)
     {

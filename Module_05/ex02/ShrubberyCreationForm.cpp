@@ -35,3 +35,24 @@ std::string ShrubberyCreationForm::getTarget() const
 {
     return (this->target);
 }
+
+void	ShrubberyCreationForm::execute(const Bureaucrat &executor) const
+{
+	if (this->getIsSigned() == false)
+		throw AForm::FormNotSignedException();
+	else if (executor.getGrade() > this->getExecGrade())
+		throw AForm::GradeTooLowException();
+	std::string filename = this->getTarget() + "_shrubbery";
+	std::ofstream outputFile(filename);
+	outputFile << "      /\\\n";
+	outputFile << "     /\\*\\\n";
+	outputFile << "    /\\0\\*\\\n";
+	outputFile << "   /*/\\/\\/\\\n";
+	outputFile << "  /\\O\\/\\*\\/\\\n";
+	outputFile << " /\\*\\/\\*\\/\\/\\\n";
+	outputFile << "/\\O\\/\\/*/\\/O/\\\n";
+	outputFile << "      ||\n";
+	outputFile << "      ||\n";
+	outputFile << "      ||\n";
+	outputFile.close();
+}

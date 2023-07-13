@@ -1,4 +1,6 @@
 #include "RobotomyRequestForm.hpp"
+#include <cstdlib>
+#include <ctime>
 
 RobotomyRequestForm::RobotomyRequestForm() : AForm(ROBOTOMYREQUESTFORM_NAME, ROBOTOMYREQUESTFORM_SIGN_GRADE, ROBOTOMYREQUESTFORM_EXEC_GRADE)
 {
@@ -34,4 +36,18 @@ RobotomyRequestForm::~RobotomyRequestForm()
 std::string RobotomyRequestForm::getTarget() const
 {
     return (this->target);
+}
+
+void	RobotomyRequestForm::execute(const Bureaucrat &executor) const
+{
+	if (this->getIsSigned() == false)
+		throw AForm::FormNotSignedException();
+	else if (executor.getGrade() > this->getExecGrade())
+		throw AForm::GradeTooLowException();
+	srand(time(NULL));
+	bool isSuccess = ((std::rand() % 100 + 1) % 2) == 0;
+	if (isSuccess)
+        std::cout << this->target << " has been robotomized successfully!\n";
+    else
+        std::cout << this->target << " has been failed to robotomy!\n";
 }

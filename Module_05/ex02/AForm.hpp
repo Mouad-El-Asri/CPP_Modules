@@ -3,42 +3,49 @@
 
 #include "Bureaucrat.hpp"
 
+class Bureaucrat;
+
 class AForm
 {
-private:
-    const std::string name;
-    bool sign;
-    const int signGrade;
-    const int execGrade;
+    private:
+        const			std::string name;
+        bool			sign;
+        const int		signGrade;
+        const int		execGrade;
 
-protected:
-    class GradeTooHighException : public std::exception
-    {
     public:
-        const char *what() const throw();
-    };
+        AForm();
+        AForm(std::string formName, int formSignGrade, int formExecGrade);
+        AForm(const AForm &other);
+        AForm			&operator=(const AForm &other);
+        virtual			~AForm();
 
-    class GradeTooLowException : public std::exception
-    {
+        std::string		getName() const;
+        bool			getIsSigned() const;
+        int				getSignGrade() const;
+        int				getExecGrade() const;
+
+		virtual void	execute(const Bureaucrat &executor) const = 0;
+        void			beSigned(const Bureaucrat &bureaucrat);
+
     public:
-        const char *what() const throw();
-    };
+        class GradeTooHighException : public std::exception
+		{
+			public:
+            	const char *what() const throw();
+        };
 
-public:
-    AForm();
-    AForm(std::string formName, int formSignGrade, int formExecGrade);
-    AForm(const AForm &other);
-    AForm &operator=(const AForm &other);
-    virtual ~AForm();
+        class GradeTooLowException : public std::exception
+        {
+			public:
+        	    const char *what() const throw();
+        };
 
-    std::string getName() const;
-    bool getIsSigned() const;
-    int getSignGrade() const;
-    int getExecGrade() const;
-
-    void beSigned(const Bureaucrat &bureaucrat);
-    void signForm(const Bureaucrat &bureaucrat) const;
-    void execute(const Bureaucrat &executor) const;
+		class FormNotSignedException : public std::exception
+        {
+			public:
+        	    const char *what() const throw();
+        };
 };
 
 std::ostream &operator<<(std::ostream &os, const AForm &form);

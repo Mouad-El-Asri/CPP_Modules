@@ -2,6 +2,7 @@
 # define SHRUBBERYCREATIONFORM_HPP
 
 # include "AForm.hpp"
+# include <fstream>
 
 # define SHRUBBERYCREATIONFORM_NAME "Shrubbery Creation Form"
 # define SHRUBBERYCREATIONFORM_SIGN_GRADE 145
@@ -20,6 +21,7 @@ class ShrubberyCreationForm : public AForm
         virtual                 ~ShrubberyCreationForm();
 
         std::string             getTarget() const;
+		void					execute(const Bureaucrat &executor) const;
 };
 
 #endif
