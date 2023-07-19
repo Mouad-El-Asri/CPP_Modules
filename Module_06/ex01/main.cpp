@@ -2,15 +2,21 @@
 
 int	main(void)
 {
-	Serializer	serializer;
-	Data		data;
-	uintptr_t	raw;
+	Data		*data = new Data;
 
-	data.s1 = "Hello, world!";
-	data.n = 42;
-	raw = serializer.serialize(&data);
-	std::cout << "Serialized data : " << raw << "\n";
-	std::cout << "Deserialized data : " << serializer.deserialize(raw) << "\n";
+	data->str = "Hello Mouad, how old are you ?";
+	data->num = 21;
+
+	uintptr_t	serialized = Serializer::serialize(data);
+	std::cout << "Serialized data: " << serialized << "\n";
+	std::cout << "Serialized data: " << data << "\n";
+
+	Data		*deserialized = Serializer::deserialize(serialized);
+	std::cout << "Deserialized data:\n";
+	std::cout << "str: " << deserialized->str << "\n";
+	std::cout << "num: " << deserialized->num << "\n";
+
+	delete data;
 
 	return (0);
 }
