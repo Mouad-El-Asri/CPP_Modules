@@ -3,23 +3,16 @@
 int	main()
 {
 	std::vector<int>	vct;
-	std::list<int>		lst;
 	std::deque<int>		deq;
 
 	for (int i = 0; i < 10; i++)
 	{
 		vct.push_back(i);
-		lst.push_back(i);
 		deq.push_back(i);
 	}
 
 	std::cout << "Vector : ";
 	for (std::vector<int>::iterator iter = vct.begin(); iter != vct.end(); iter++)
-		std::cout << *iter << " ";
-	std::cout << "\n";
-
-	std::cout << "List : ";
-	for (std::list<int>::iterator iter = lst.begin(); iter != lst.end(); iter++)
 		std::cout << *iter << " ";
 	std::cout << "\n";
 
@@ -33,8 +26,8 @@ int	main()
 	std::cout << "Vector : ";
 	try
 	{
-		std::cout << *easyfind(vct, 3) << std::endl;
-		std::cout << *easyfind(vct, 11) << std::endl;
+		std::cout << *easyfind(vct, 3) << "\n";
+		std::cout << *easyfind(vct, 11) << "\n";
 	}
 	catch (std::exception &e)
 	{
@@ -43,24 +36,11 @@ int	main()
 	
 	std::cout << "\n";
 
-	std::cout << "List : ";
-	try
-	{
-		std::cout << *easyfind(lst, 7) << std::endl;
-		std::cout << *easyfind(lst, 10) << std::endl;
-	}
-	catch (std::exception &e)
-	{
-		std::cout << "Number not found\n";
-	}
-
-	std::cout << "\n";
-
 	std::cout << "Deque : ";
 	try
 	{
-		std::cout << *easyfind(deq, 1) << std::endl;
-		std::cout << *easyfind(deq, -1) << std::endl;
+		std::cout << *easyfind(deq, 1) << "\n";
+		std::cout << *easyfind(deq, -1) << "\n";
 	}
 	catch (std::exception &e)
 	{
