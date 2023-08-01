@@ -15,7 +15,7 @@ std::ifstream	*checkArgs(int argc, char **argv)
 	return (input);
 }
 
-std::map<std::string, int>	readAndStoreData()
+std::map<int, float>	readAndStoreData()
 {
 	std::string dataFile = "data.csv";
 	std::ifstream data(dataFile);
@@ -23,15 +23,23 @@ std::map<std::string, int>	readAndStoreData()
 	if (!data)
 			throw std::runtime_error("Failed to open data file : " + dataFile + ".");
 
-	std::map<std::string, int> dataMap;
+	std::map<int, float> dataMap;
 	std::string line;
 	std::getline(data, line);
 	while (std::getline(data, line))
 	{
 		std::istringstream lineParser(line);
 		std::string key, value;
+		std::string newKey;
 		if (std::getline(lineParser, key, ',') && std::getline(lineParser, value))
-			dataMap[key] = std::stoi(value);
+		{
+			for (unsigned long i = 0; i < key.length(); i++)
+			{
+				if (key[i] != '-')
+					newKey += key[i];
+			}
+			dataMap[std::stoi(newKey)] = std::stof(value);
+		}
 	}
 	data.close();
 	return (dataMap);
@@ -155,7 +163,39 @@ int	checkDateFormat(int year, int month, int day)
 	return (0);
 }
 
-void	readAndCheckInput(std::ifstream &input)
+int	checkValueErrors(const std::string& value)
+{
+	if (value.empty())
+	{
+		std::cerr << "Error: empty value.\n";
+		return (-1);
+	}
+	std::stringstream valueParser(value);
+	int num;
+	if (!(valueParser >> num))
+	{
+		std::cerr << "Error: bad value => " << value << "\n";
+		return (-1);
+	}
+	else if (countOccurrences(value, '.') > 1 || countOccurrences(value, '+'))
+	{
+		std::cerr << "Error: invalid value format.\n";
+		return (-1);
+	}
+	else if (num < 0)
+	{
+		std::cerr << "Error: not a positive number.\n";
+		return (-1);
+	}
+	else if(num > 1000)
+	{
+		std::cerr << "Error: too large number.\n";
+		return (-1);
+	}
+	return (num);
+}
+
+void	readAndCheckInput(std::ifstream &input, std::map<int, float> dataMap)
 {
 	std::string line;
 
@@ -173,35 +213,18 @@ void	readAndCheckInput(std::ifstream &input)
 		std::stringstream lineParser(line);
 		std::string key, value;
 		std::getline(lineParser, key, '|') && std::getline(lineParser, value);
-		if (checkDateErrors(key))
+		if (checkDateErrors(key) || checkValueErrors(value) == -1)
 			continue ;
-		if (value.empty())
+		int num = checkValueErrors(value);
+		std::string newKey;
+		for (unsigned long i = 0; i < key.length(); i++)
 		{
-			std::cerr << "Error: empty value.\n";
-			continue ;
+			if (key[i] != '-')
+				newKey += key[i];
 		}
-		std::stringstream valueParser(value);
-		int num;
-		if (!(valueParser >> num))
-		{
-			std::cerr << "Error: bad value => " << value << "\n";
-			continue ;
-		}
-		if (num < 0)
-		{
-			std::cerr << "Error: not a positive number.\n";
-			continue ;
-		}
-		if(num > 1000)
-		{
-			std::cerr << "Error: too large number.\n";
-			continue ;
-		}
-		if (countOccurrences(value, '.') > 1 || countOccurrences(value, '+'))
-		{
-			std::cerr << "Error: invalid value format.\n";
-			continue ;
-		}
+		std::cout << newKey << "\n";
+		std::map<int, float>::iterator it = dataMap.lower_bound(std::stoi(newKey));
+		std::cout << num * it->second << "\n";
 	}
 	input.close();
 }
