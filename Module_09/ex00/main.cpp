@@ -4,7 +4,7 @@ int	main(int argc, char **argv)
 {
 	try
 	{
-		checkArgs(argc, argv);
+		readAndCheckInput(*checkArgs(argc, argv));
 	}
 	catch(const std::exception &e)
 	{

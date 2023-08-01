@@ -8,8 +8,18 @@
 #include <string>
 #include <sstream>
 #include <iterator>
+#include <algorithm>
+#include <cctype>
 
-void						checkArgs(int argc, char **argv);
+std::ifstream				*checkArgs(int argc, char **argv);
 std::map<std::string, int>	readAndStoreData();
+void						removeWhitespaces(std::string& str);
+bool						charIsNotInString(const std::string& str, char ch);
+bool						isOnlyWhitespaces(const std::string& str);
+int							countOccurrences(const std::string& str, char c);
+void						readAndCheckFirstLine(std::ifstream &input);
+int							checkDateErrors(const std::string& date);
+int							checkDateFormat(int year, int month, int day);
+void						readAndCheckInput(std::ifstream &input);
 
 #endif
