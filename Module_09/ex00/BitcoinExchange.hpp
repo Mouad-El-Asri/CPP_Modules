@@ -7,5 +7,9 @@
 #include <map>
 #include <string>
 #include <sstream>
+#include <iterator>
+
+void						checkArgs(int argc, char **argv);
+std::map<std::string, int>	readAndStoreData();
 
 #endif
