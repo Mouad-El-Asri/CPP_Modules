@@ -163,7 +163,7 @@ int	checkDateFormat(int year, int month, int day)
 	return (0);
 }
 
-int	checkValueErrors(const std::string& value)
+float	checkValueErrors(const std::string& value)
 {
 	if (value.empty())
 	{
@@ -171,7 +171,7 @@ int	checkValueErrors(const std::string& value)
 		return (-1);
 	}
 	std::stringstream valueParser(value);
-	int num;
+	float num;
 	if (!(valueParser >> num))
 	{
 		std::cerr << "Error: bad value => " << value << "\n";
@@ -215,16 +215,15 @@ void	readAndCheckInput(std::ifstream &input, std::map<int, float> dataMap)
 		std::getline(lineParser, key, '|') && std::getline(lineParser, value);
 		if (checkDateErrors(key) || checkValueErrors(value) == -1)
 			continue ;
-		int num = checkValueErrors(value);
+		float num = checkValueErrors(value);
 		std::string newKey;
 		for (unsigned long i = 0; i < key.length(); i++)
 		{
 			if (key[i] != '-')
 				newKey += key[i];
 		}
-		std::cout << newKey << "\n";
 		std::map<int, float>::iterator it = dataMap.lower_bound(std::stoi(newKey));
-		std::cout << num * it->second << "\n";
+		std::cout << key << " => " << num << " = " << num * it->second << "\n";
 	}
 	input.close();
 }

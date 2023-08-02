@@ -20,7 +20,7 @@ int							countOccurrences(const std::string& str, char c);
 void						readAndCheckFirstLine(std::ifstream &input);
 int							checkDateErrors(const std::string& date);
 int							checkDateFormat(int year, int month, int day);
-int							checkValueErrors(const std::string& value);
+float						checkValueErrors(const std::string& value);
 void						readAndCheckInput(std::ifstream &input, std::map<int, float> dataMap);
 
 #endif
