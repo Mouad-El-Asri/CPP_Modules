@@ -8,14 +8,12 @@ int	main(int argc, char **argv)
 
 		std::string			input(argv[1]);
 		std::stack<int>		numbersStack;
-		std::stack<char>	operatorsStack;
-		// int					result;
+		int					result;
 
 		checkInputCharacters(input);
-		pushElementsToTheStacks(input, numbersStack, operatorsStack);
-
-		// result = calculateResult(numbersStack, operatorsStack);
-		// std::cout << result << "\n";
+		pushElementsToTheStacks(input, numbersStack);
+		result = numbersStack.top();
+		std::cout << result << "\n";
 	}
 	catch(const std::exception &e)
 	{

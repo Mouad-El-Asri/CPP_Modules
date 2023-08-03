@@ -16,7 +16,7 @@ void	removeWhitespaces(std::string& str)
 void	checkInputCharacters(std::string& input)
 {
 	removeWhitespaces(input);
-	if (input.length() < 3)
+	if (input.length() < 3 || strchr("0123456789", input[input.length() - 1]))
 		throw std::runtime_error("Input format is invalid.");
 	std::string allowedCharacters = "0123456789+-/*";
 
@@ -25,50 +25,50 @@ void	checkInputCharacters(std::string& input)
 		throw std::runtime_error("Disallowed character found in the input.");
 }
 
-void	pushElementsToTheStacks(std::string& input, std::stack<int>& numbersStack, std::stack<char>& operatorsStack)
+void	pushElementsToTheStacks(std::string& input, std::stack<int>& numbersStack)
 {
 	std::string strCharacter = input.substr(0, 2);
 	std::string operators = "";
 	if (strCharacter.find_first_not_of("0123456789") != std::string::npos)
 		throw std::runtime_error("Input format is invalid.");
-	else
+	for (size_t i = 0; i < input.length(); i++)
 	{
-		numbersStack.push(strCharacter[0] - '0');
-		numbersStack.push(strCharacter[1] - '0');
+		strCharacter = input[i];
+		if (strCharacter.find_first_not_of("+-*/") == std::string::npos)
+			operators += input[i];
 	}
-	for (size_t i = 2; i < input.length(); i++)
+	if (input.length() != ((operators.length() * 2) + 1))
+		throw std::runtime_error("The size of numbers or operators is invalid.");
+	for (size_t i = 0; i < input.length(); i++)
 	{
 		strCharacter = input[i];
 		if (strCharacter.find_first_not_of("+-*/") != std::string::npos)
 			numbersStack.push(input[i] - '0');
 		else
-			operators += input[i];
+			calculateResult(numbersStack, operators);
 	}
-	for (int i = operators.length() - 1; i >= 0; i--)
-		operatorsStack.push(operators[i]);
-	if (numbersStack.size() != (operatorsStack.size() + 1))
-		throw std::runtime_error("The size of numbers or operators is invalid.");
 }
 
-// int	calculateResult(std::stack<int>& numbersStack, std::stack<char>& operatorsStack)
-// {
-// 	int	result = numbersStack.top();
-// 	size_t operatorsStackSize = operatorsStack.size();
+void	calculateResult(std::stack<int>& numbersStack, std::string &operators)
+{
+	int	result = 0;
+	int j = 0;
 
-// 	for (size_t i = 0; i < operatorsStackSize; i++)
-// 	{
-// 		std::cout << "result : " << result << "\n";
-// 		numbersStack.pop();
-// 		std::cout << "top : " << numbersStack.top() << "\n";
-// 		if (operatorsStack.top() == '*')
-// 			result = numbersStack.top() * result;
-// 		else if (operatorsStack.top() == '/')
-// 			result = numbersStack.top() / result;
-// 		else if (operatorsStack.top() == '+')
-// 			result = numbersStack.top() + result;
-// 		else
-// 			result = numbersStack.top() - result;
-// 		operatorsStack.pop();
-// 	}
-// 	return (result);
-// }
+	result = numbersStack.top();
+	numbersStack.pop();
+	if (operators[j] == '+')
+		result = numbersStack.top() + result;
+	else if (operators[j] == '-')
+		result = numbersStack.top() - result;
+	else if (operators[j] == '*')
+		result = numbersStack.top() * result;
+	else
+	{
+		if (result == 0)
+			throw std::runtime_error("Divide by zero error");
+		result = numbersStack.top() / result;
+	}
+	numbersStack.pop();
+	numbersStack.push(result);
+	j++;
+}
