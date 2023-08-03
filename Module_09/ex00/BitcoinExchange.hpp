@@ -10,9 +10,11 @@
 #include <iterator>
 #include <algorithm>
 #include <cctype>
+#include <cstdlib>
 
 std::ifstream				*checkArgs(int argc, char **argv);
 std::map<int, float>		readAndStoreData();
+float						stringToFloat(const std::string &value);
 void						removeWhitespaces(std::string& str);
 bool						charIsNotInString(const std::string& str, char ch);
 bool						isOnlyWhitespaces(const std::string& str);

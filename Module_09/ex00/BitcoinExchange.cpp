@@ -38,11 +38,20 @@ std::map<int, float>	readAndStoreData()
 				if (key[i] != '-')
 					newKey += key[i];
 			}
-			dataMap[std::stoi(newKey)] = std::stof(value);
+			dataMap[std::atoi(newKey.c_str())] = stringToFloat(value);
 		}
 	}
 	data.close();
 	return (dataMap);
+}
+
+float	stringToFloat(const std::string &value)
+{
+	float result;
+	std::stringstream valueParser(value);
+	if (!(valueParser >> result))
+		throw std::runtime_error("Invalid float conversion: " + value);
+	return (result);
 }
 
 void	removeWhitespaces(std::string& str)
@@ -222,13 +231,13 @@ void	readAndCheckInput(std::ifstream &input, std::map<int, float> dataMap)
 			if (key[i] != '-')
 				newKey += key[i];
 		}
-		std::map<int, float>::iterator it = dataMap.lower_bound(std::stoi(newKey));
+		std::map<int, float>::iterator it = dataMap.lower_bound(std::atoi((newKey.c_str())));
 		if (it == dataMap.begin())
 		{
 			std::cerr << "Error: date is too early => " << key << "\n";
 			continue ;
 		}
-		else if (it == dataMap.end() || it->first != std::stoi(newKey))
+		else if (it == dataMap.end() || it->first != std::atoi(newKey.c_str()))
 			it--;
 		std::cout << key << " => " << num << " = " << num * it->second << "\n";
 	}
