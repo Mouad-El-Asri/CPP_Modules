@@ -37,6 +37,10 @@ void	pushElementsToTheStacks(std::string& input, std::stack<int>& numbersStack)
 		if (strCharacter.find_first_not_of("+-*/") == std::string::npos)
 			operators += input[i];
 	}
+
+	int	result = 0;
+	int	indx = 0;
+
 	if (input.length() != ((operators.length() * 2) + 1))
 		throw std::runtime_error("The size of numbers or operators is invalid.");
 	for (size_t i = 0; i < input.length(); i++)
@@ -45,22 +49,20 @@ void	pushElementsToTheStacks(std::string& input, std::stack<int>& numbersStack)
 		if (strCharacter.find_first_not_of("+-*/") != std::string::npos)
 			numbersStack.push(input[i] - '0');
 		else
-			calculateResult(numbersStack, operators);
+			calculateResult(numbersStack, operators, result, indx);
 	}
 }
 
-void	calculateResult(std::stack<int>& numbersStack, std::string &operators)
+void	calculateResult(std::stack<int>& numbersStack, const std::string &operators, \
+		int &result, int &indx)
 {
-	int	result = 0;
-	int j = 0;
-
 	result = numbersStack.top();
 	numbersStack.pop();
-	if (operators[j] == '+')
+	if (operators[indx] == '+')
 		result = numbersStack.top() + result;
-	else if (operators[j] == '-')
+	else if (operators[indx] == '-')
 		result = numbersStack.top() - result;
-	else if (operators[j] == '*')
+	else if (operators[indx] == '*')
 		result = numbersStack.top() * result;
 	else
 	{
@@ -70,5 +72,5 @@ void	calculateResult(std::stack<int>& numbersStack, std::string &operators)
 	}
 	numbersStack.pop();
 	numbersStack.push(result);
-	j++;
+	indx++;
 }
