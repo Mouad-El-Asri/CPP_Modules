@@ -139,7 +139,7 @@ int	checkDateErrors(const std::string& date)
 
 int	checkDateFormat(int year, int month, int day)
 {
-	if (year < 2009 || year > 2022)
+	if (year < 2009)
 	{
 		std::cerr << "Error: invalid year.\n";
 		return (1);
@@ -223,6 +223,13 @@ void	readAndCheckInput(std::ifstream &input, std::map<int, float> dataMap)
 				newKey += key[i];
 		}
 		std::map<int, float>::iterator it = dataMap.lower_bound(std::stoi(newKey));
+		if (it == dataMap.begin())
+		{
+			std::cerr << "Error: date is too early => " << key << "\n";
+			continue ;
+		}
+		else if (it == dataMap.end() || it->first != std::stoi(newKey))
+			it--;
 		std::cout << key << " => " << num << " = " << num * it->second << "\n";
 	}
 	input.close();
