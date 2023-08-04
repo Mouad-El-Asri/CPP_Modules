@@ -59,6 +59,14 @@ void	removeWhitespaces(std::string& str)
     str.erase(std::remove_if(str.begin(), str.end(), isspace), str.end());
 }
 
+std::string	trimSpaces(const std::string& str)
+{
+    size_t start = str.find_first_not_of(" \t\r\n");
+    size_t end = str.find_last_not_of(" \t\r\n");
+
+    return (str.substr(start, end - start + 1));
+}
+
 bool	charIsNotInString(const std::string& str, const char ch)
 {
     return (str.find(ch) == std::string::npos);
@@ -179,6 +187,12 @@ float	checkValueErrors(const std::string& value)
 		std::cerr << "Error: empty value.\n";
 		return (-1);
 	}
+	if (value[0] == '.' || value[value.length() - 1] == '.' || \
+		value.find_first_not_of("-+0123456789.") != std::string::npos)
+	{
+		std::cerr << "Error: bad value => " << value << "\n";
+		return (-1);
+	}
 	std::stringstream valueParser(value);
 	float num;
 	if (!(valueParser >> num))
@@ -218,10 +232,11 @@ void	readAndCheckInput(std::ifstream &input, std::map<int, float> dataMap)
 			std::cerr << "Error: bad input => " << line << "\n";
 			continue ;
 		}
-		removeWhitespaces(line);
 		std::stringstream lineParser(line);
 		std::string key, value;
 		std::getline(lineParser, key, '|') && std::getline(lineParser, value);
+		removeWhitespaces(key);
+		value = trimSpaces(value);
 		if (checkDateErrors(key) || checkValueErrors(value) == -1)
 			continue ;
 		float num = checkValueErrors(value);

@@ -16,6 +16,7 @@ std::ifstream				*checkArgs(int argc, char **argv);
 std::map<int, float>		readAndStoreData();
 float						stringToFloat(const std::string &value);
 void						removeWhitespaces(std::string& str);
+std::string					trimSpaces(const std::string& str);
 bool						charIsNotInString(const std::string& str, char ch);
 bool						isOnlyWhitespaces(const std::string& str);
 int							countOccurrences(const std::string& str, char c);
