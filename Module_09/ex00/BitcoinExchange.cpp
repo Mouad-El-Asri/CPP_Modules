@@ -235,8 +235,8 @@ void	readAndCheckInput(std::ifstream &input, std::map<int, float> dataMap)
 		std::stringstream lineParser(line);
 		std::string key, value;
 		std::getline(lineParser, key, '|') && std::getline(lineParser, value);
-		removeWhitespaces(key);
 		value = trimSpaces(value);
+		key = trimSpaces(key);
 		if (checkDateErrors(key) || checkValueErrors(value) == -1)
 			continue ;
 		float num = checkValueErrors(value);
